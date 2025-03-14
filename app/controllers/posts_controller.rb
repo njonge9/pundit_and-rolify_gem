@@ -4,7 +4,17 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    @categories = Category.all
+    @tags = Tag.all
     @posts = Post.all
+
+    if params[:category_id].present?
+      @posts = @posts.where(category_id: params[:category_id])
+    end
+
+    if params[:tag_id].present?
+      @posts = @posts.joins(:tags).where(tags: { id: params[:tag_id] })
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -67,6 +77,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :title, :body, :published_at ])
+      params.expect(post: [ :title, :body, :published_at, :category_id, tag_ids: [] ])
     end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users, only: [ :index ]
   devise_for :users
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

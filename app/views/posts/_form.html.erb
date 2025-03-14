@@ -26,6 +26,16 @@
     <%= form.datetime_field :published_at %>
   </div>
 
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tag_ids, "Tags" %>
+    <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true }%>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>

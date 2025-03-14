@@ -2,7 +2,27 @@
 
 <% content_for :title, "Posts" %>
 
+
 <h1>Posts</h1>
+
+<h2 class="mb-3">Filter by Category</h2>
+<%= form_with url: posts_path, method: :get, local: true, class: "mb-4" do %>
+  <div class="input-group">
+    <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+      include_blank: "All Categories" , class: "form-select" %>
+      <%= submit_tag "Filter" , class: "btn btn-primary" %>
+  </div>
+  <% end %>
+
+    <h2 class="mb-3">Filter by Tag</h2>
+    <%= form_with url: posts_path, method: :get, local: true, class: "mb-4" do %>
+      <div class="input-group">
+        <%= select_tag :tag_id, options_from_collection_for_select(@tags, :id, :name, params[:tag_id]),
+          include_blank: "All Tags" , class: "form-select" %>
+          <%= submit_tag "Filter" , class: "btn btn-primary" %>
+      </div>
+      <% end %>
+
 
 <div id="posts">
   <table class="table">
